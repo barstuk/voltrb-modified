@@ -1,15 +1,17 @@
 <:Body>
-  {{ if page._reloading }}
-    <div class="notices alert alert-info">Reloading...</div>
-  {{ end }}
-  {{ if channel.status == :reconnecting }}
-    <div class="notices alert alert-info">
-      Connection Lost... {{ channel.error }}...
-      {{ if channel.reconnect_interval }}  Reconnecting in {{ (channel.reconnect_in / 1000.0).round }} sec{{ end }}
-    </div>
-  {{ end }}
-  {{ if page._reconnected }}
-    <div class="notices alert alert-success">Reconnected!</div>
+  {{ if show_connection_errors }}
+    {{ if page._reloading }}
+      <div class="notices alert alert-info">Reloading...</div>
+    {{ end }}
+    {{ if channel.status == :reconnecting }}
+      <div class="notices alert alert-info">
+        Connection Lost... {{ channel.error }}...
+        {{ if channel.reconnect_interval }}  Reconnecting in {{ (channel.reconnect_in / 1000.0).round }} sec{{ end }}
+      </div>
+    {{ end }}
+    {{ if page._reconnected }}
+      <div class="notices alert alert-success">Reconnected!</div>
+    {{ end }}
   {{ end }}
   {{ flash.keys.each do |key| }}
     {{ if flash.send(:"_#{key}").present? }}

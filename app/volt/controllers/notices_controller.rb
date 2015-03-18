@@ -2,6 +2,10 @@ module Volt
   class NoticesController < ModelController
     model :page
 
+    def show_connection_errors
+      false
+    end
+
     def hey
       'yep'
     end
